@@ -1,0 +1,16 @@
+ARG BTCDBASE_IMAGE
+FROM uselagoon/commons as commons
+FROM ${BTCDBASE_IMAGE} as btcd-base
+
+COPY --from=commons /bin/fix-permissions /bin/ep /bin/
+
+COPY btcd-lagoon.conf /etc/btcd.conf
+
+ENV HOME=/home
+
+RUN mkdir -p /data \
+    && fix-permissions /data  \
+    && fix-permissions /home
+
+ENTRYPOINT ["btcd"]
+CMD ["--configfile=/etc/btcd.conf"]
