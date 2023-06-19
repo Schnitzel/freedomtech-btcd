@@ -11,6 +11,9 @@ ENV HOME=/home \
 
 RUN mkdir -p /data \
     && fix-permissions /data  \
-    && fix-permissions /home
+    && fix-permissions /home \
+    && fix-permissions /etc/btcd.conf
+
+ENTRYPOINT [ "" ]
 
 CMD [ "sh", "-c", "ep /etc/btcd.conf && btcd --configfile=/etc/btcd.conf" ]
