@@ -6,11 +6,11 @@ COPY --from=commons /bin/fix-permissions /bin/ep /bin/
 
 COPY btcd-lagoon.conf /etc/btcd.conf
 
-ENV HOME=/home
+ENV HOME=/home \
+    BITCOIN_NETWORK=testnet
 
 RUN mkdir -p /data \
     && fix-permissions /data  \
     && fix-permissions /home
 
-ENTRYPOINT ["btcd"]
-CMD ["--configfile=/etc/btcd.conf"]
+CMD [ "sh", "-c", "ep /etc/btcd.conf && btcd --configfile=/etc/btcd.conf" ]
