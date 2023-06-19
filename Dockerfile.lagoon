@@ -1,4 +1,4 @@
-ARG BTCDBASE_IMAGE
+ARG BTCDBASE_IMAGE=schnitzel/btcd
 FROM uselagoon/commons as commons
 FROM ${BTCDBASE_IMAGE} as btcd-base
 
